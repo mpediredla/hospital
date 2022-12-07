@@ -7,19 +7,17 @@ import Menu1 from './Components/Menu';
 import { Routes,Route } from 'react-router-dom';
 import Inbox from './Components/Inbox';
 import OutBox from './Components/OutBox';
-import Navbar from './Components/Navbar';
 
 function App() {
   return (
     <div className="App">
-  {/* <Routes>
+  <Routes>
     <Route path='/' element={<Menu1/>} >
     <Route path='inbox' element={<Inbox/>} />
     <Route path='outbox' element={<OutBox/>} />
     </Route>
-  </Routes> */}
+  </Routes>
 
-<Navbar/>
     </div>
   );
 }
