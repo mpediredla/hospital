@@ -114,6 +114,7 @@ const outboxHandler=()=>{
           [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' ,height: drawerHeight},
         }}
       >
+    
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
           <List>
@@ -155,8 +156,6 @@ const outboxHandler=()=>{
         <Typography >
         <Outlet/>
         </Typography>
-        {/* <Typography paragraph>
-        </Typography> */}
       </Box>
     </Box>
 
