@@ -118,37 +118,9 @@ const outboxHandler=()=>{
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
           <List>
-<ListItemButton onClick={inboxHandler}>Inbox</ListItemButton>
+<ListItemButton onClick={inboxHandler}>List of patients</ListItemButton>
 <ListItemButton onClick={outboxHandler}>Outbox</ListItemButton>
-
-
-            {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))} */}
           </List>
-
-          {/* <Divider /> */}
-
-
-          {/* <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List> */}
         </Box>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
@@ -159,7 +131,7 @@ const outboxHandler=()=>{
       </Box>
     </Box>
 
-
+<br/><br/><br/>
     <footer>
       <Container maxWidth="xl">
         <Box py={6} display="flex" flexWrap="wrap" alignItems="center" className={classes.rootBox}>
