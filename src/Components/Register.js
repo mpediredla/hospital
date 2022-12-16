@@ -191,7 +191,11 @@ const Register = () => {
     localStorage.setItem("initialValues", JSON.stringify(data));
   }, [data]);
 
+const method1=(e)=>{
+console.log("dsfsd");
+formik.values.Firstname="2"
 
+}
   return (
     <>
     <div className="regimg">
@@ -203,13 +207,14 @@ const Register = () => {
           <div>
             
             <Stack direction="row" spacing={8} className="stackFields">
-              <div style={{'color':'white'}}>
+              <div >
                 <TextField 
                   id="outlined-basic"
                   name="Firstname"
                   maxLength="5"
                   label={ <span >{"FirstName"}<StarIcon className="icon" /></span>}
                   value={formik.values.Firstname}
+                  onInput={method1}
                   onChange={formik.handleChange}
                   error={
                     formik.touched.Firstname && Boolean(formik.errors.Firstname)

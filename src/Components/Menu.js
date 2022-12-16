@@ -72,8 +72,8 @@ function Menu1(props) {
   }
 
 
-const inboxHandler=()=>{
-    navigate("inbox")
+const patientslist=()=>{
+    navigate("patientslist")
 }
 const outboxHandler=()=>{
     navigate("outbox")
@@ -118,7 +118,7 @@ const outboxHandler=()=>{
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
           <List>
-<ListItemButton onClick={inboxHandler}>List of patients</ListItemButton>
+<ListItemButton onClick={patientslist}>List of patients</ListItemButton>
 <ListItemButton onClick={outboxHandler}>Outbox</ListItemButton>
           </List>
         </Box>

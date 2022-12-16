@@ -14,15 +14,16 @@ import Paper from '@mui/material/Paper';
 import {Outlet, useNavigate} from 'react-router-dom';
 import axios from "axios";
 import { useEffect, useState } from "react";
-import CreateIcon from '@mui/icons-material/Create';
+import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import IconButton from '@mui/material/IconButton';
+import Card from '@mui/material/Card';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    backgroundColor: theme.palette.common,
+    color: theme.palette.common.black,
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -38,46 +39,56 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+
+// const editHandler1 = (row) => {
+//   setEmpEid(e.Eid);
+//   setEmpEname(e.Ename);
+//   setEmpEmail(e.Email);
+//   setEmpSkillset(e.Skillset);
+//   setEmpTraining(e.Training);
+//   setEmpTrainingStatus(e.TrainingStatus);
+//   setShow(true);
+// };
+
+
   
 
-function Inbox() {
+function ListOfPatients() {
 
   const navigate = useNavigate();
 
   const editHandler=()=>{
-    navigate('patientDetails')
+    navigate('/menu/patientDetails')
   }
 
   
   const [data, setData] = useState([]);
   const getData=()=>{
     axios
-        .get("http://172.17.12.65:3000/getlistofpatients")
-        .then((response) => setData(response.data));   
+        .get("http://172.17.12.65:4000/listofusers")
+        .then((response) => setData(response.data.respones)); 
   }
-  
+  console.log(data);
+
   useEffect(() => {
       getData();
   }, []);
 
 
-  const deleteHandler=(sno)=>{
-    axios
-    .delete("http://172.17.12.65:3000/delpatient/sno" + sno)
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  const deleteHandler=(row)=>{
+    var deleted=axios.delete(`http://172.17.12.65:4000/deleteuser/${row.Id}`)
+    .then((response) =>console.log(response))
+    getData(deleted);
 };
-  
+
 
 
 
   return (
     <>
     <div>
+    <Card >
+
        <Stack direction="row" spacing={3} >
  <Box
       component="form"
@@ -88,7 +99,6 @@ function Inbox() {
       autoComplete="off"
     >
       <TextField id="outlined-basic" label="Patient name" variant="outlined" />
-      <TextField id="outlined-basic" label="Token number" variant="outlined" />
     </Box>
       <Button variant="contained" color="primary" style={{'width':'20ch', 'height':'7ch','marginTop':'8px'}}>
         search
@@ -97,6 +107,8 @@ function Inbox() {
         Reset
       </Button>
       </Stack>
+      </Card>
+    
     </div>
 
 
@@ -105,8 +117,8 @@ function Inbox() {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Sno</StyledTableCell>
-            <StyledTableCell align="center">Patient Name</StyledTableCell>
+            <StyledTableCell>Id</StyledTableCell>
+            <StyledTableCell align="left">Patient Name</StyledTableCell>
             <StyledTableCell align="center">Phone numbe</StyledTableCell>
             <StyledTableCell align="center">Address</StyledTableCell>
             <StyledTableCell align="center">Appointment Date&Time</StyledTableCell>
@@ -116,32 +128,34 @@ function Inbox() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row,sno) => (
-          <StyledTableRow key={row.sno}>
+          {data.map((row,Id) => {
+            return(
+          <StyledTableRow key={row.Id}>
           <StyledTableCell component="th" scope="row">
-          {row.sno}
+          {row.Id}
           </StyledTableCell>       
-              <StyledTableCell align="center">{row.patientname}</StyledTableCell>
-              <StyledTableCell align="center">{row.phonenumber}</StyledTableCell>
-              <StyledTableCell align="center">{row.address}</StyledTableCell>
+            <StyledTableCell align="left">{row.LastName} {row.Firstname} {row.Middlename}</StyledTableCell>
+              <StyledTableCell align="center">{row.PhoneNumber}</StyledTableCell>
+              <StyledTableCell align="center">{row.Addressline1}</StyledTableCell>
               <StyledTableCell align="center">{row.appointment}</StyledTableCell>
               <StyledTableCell align="center">{row.patientproblem}</StyledTableCell>
               <StyledTableCell align="center">
-              <Button variant="contained" color="primary"  onClick={editHandler}><CreateIcon/></Button>
-                </StyledTableCell>
-                <StyledTableCell align="center">
-              <Button variant="contained" color="primary" onClick={deleteHandler(row.sno)}><DeleteIcon/></Button>
-                </StyledTableCell>
+              <IconButton aria-label="edit" color="primary" onClick={()=>editHandler()}><EditIcon /></IconButton>                
+              </StyledTableCell>
+              <StyledTableCell align="center">
+              <IconButton aria-label="delete" color="primary" onClick={()=>deleteHandler(row)}><DeleteIcon /></IconButton>                
+              </StyledTableCell>
             </StyledTableRow>
+            )
             
-          ))}
+})}
         </TableBody>
       </Table>
     </TableContainer>
     </div>
-    <Outlet/>
+    {/* <Outlet/> */}
     </>
   )
 }
 
-export default Inbox
+export default ListOfPatients

@@ -114,3 +114,19 @@
 .MuiFormHelperText-root Mui-error MuiFormHelperText-filled{
   display: none !important;
 }
+
+
+
+/* ListOfPatients */
+
+
+.css-u10pvi-MuiStack-root {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    background-color:aliceblue ;
+}
